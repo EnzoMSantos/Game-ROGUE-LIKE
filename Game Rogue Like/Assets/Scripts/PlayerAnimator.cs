@@ -26,6 +26,10 @@ public class PlayerAnimator : MonoBehaviour
     {
         if(pm.moveDir.x != 0 || pm.moveDir.y != 0) {
             anim.SetBool("Move", true);
+        } 
+        else
+        {
+            anim.SetBool("Move", false);
         }
     }
 }
