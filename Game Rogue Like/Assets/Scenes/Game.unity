@@ -157,10 +157,13 @@ MonoBehaviour:
   - {fileID: 3187278628803476137, guid: 66232692af59e9744ba0605fc8492c61, type: 3}
   - {fileID: 3187278628803476137, guid: a5fc51e458dd81449b66840f76c80842, type: 3}
   player: {fileID: 1391641060}
-  checkRadius: 0.18
+  checkRadius: 0.2
   terrainMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
+  currentChunck: {fileID: 0}
+  distance_positive: 20
+  distance_negative: -20
 --- !u!4 &431665154
 Transform:
   m_ObjectHideFlags: 0
@@ -300,7 +303,7 @@ GameObject:
   - component: {fileID: 1391641066}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
