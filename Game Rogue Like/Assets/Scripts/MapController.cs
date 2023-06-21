@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MapController : MonoBehaviour
 {
-
     public List<GameObject> terrainChuncks;
     public GameObject player;
     public float checkRadius;
@@ -18,22 +17,23 @@ public class MapController : MonoBehaviour
     GameObject latestChunk;
     public float maxOpDist;
     float opDist;
+    float optimizerCooldown;
+    public float optimizerCooldownDur;
 
-    // Start is called before the first frame update
+
     void Start()
     {
         pm = FindObjectOfType<PlayerMovement>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         ChunckChecker();
+        ChunkOptimizer(); 
     }
 
     void ChunckChecker() 
-    {
-        
+    {     
         if(!currentChunck) 
         {
             return;
@@ -88,13 +88,13 @@ public class MapController : MonoBehaviour
             }
         }
        else if(pm.moveDir.x < 0 && pm.moveDir.y > 0) //left up
-{
+        {
         if(!Physics2D.OverlapCircle(currentChunck.transform.Find("Left Up").position, checkRadius, terrainMask)) 
         {
             noTerrainPosition = currentChunck.transform.Find("Left Down").position;
             SpawnChunck();  
         }
-}
+        }
         else if(pm.moveDir.x < 0 && pm.moveDir.y < 0) //left down
         {
             if(!Physics2D.OverlapCircle(currentChunck.transform.Find("Left Down").position, checkRadius, terrainMask)) 
@@ -106,9 +106,36 @@ public class MapController : MonoBehaviour
     }
 
     void SpawnChunck()
-   {
-    int rand = Random.Range(0, terrainChuncks.Count);
-     // Posição inicial igual à posição do jogador  
-    Instantiate(terrainChuncks[rand], noTerrainPosition, Quaternion.identity);
+    {
+        int rand = Random.Range(0, terrainChuncks.Count);
+        // Posição inicial igual à posição do jogador  
+        latestChunk = Instantiate(terrainChuncks[rand], noTerrainPosition, Quaternion.identity);
+        spawnedChunks.Add(latestChunk);
+    }
+
+    void ChunkOptimizer() 
+    {
+        optimizerCooldown -= Time.deltaTime;
+
+        if(optimizerCooldown <= 0f)
+        {
+            optimizerCooldown = optimizerCooldownDur;
+        }
+        else
+        {
+            return;
+        }
+        foreach (GameObject chunk in spawnedChunks)
+        {
+            opDist = Vector3.Distance(player.transform.position, chunk.transform.position);
+            if(opDist > maxOpDist)
+            {
+                chunk.SetActive(false);
+            }
+            else
+            {
+                chunk.SetActive(true);
+            }
+        }
     }
 }

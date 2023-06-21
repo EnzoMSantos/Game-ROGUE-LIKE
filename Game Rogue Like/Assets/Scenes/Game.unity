@@ -160,10 +160,12 @@ MonoBehaviour:
   checkRadius: 0.2
   terrainMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   currentChunck: {fileID: 0}
-  distance_positive: 20
-  distance_negative: -20
+  spawnedChunks:
+  - {fileID: 1161482270}
+  maxOpDist: 50
+  optimizerCooldownDur: 1
 --- !u!4 &431665154
 Transform:
   m_ObjectHideFlags: 0
@@ -286,6 +288,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1391641062}
   offset: {x: 0, y: 0, z: -10}
+--- !u!1 &1161482270 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3187278628803476137, guid: 0e84917ee9577f64b903c033e7c09a0b, type: 3}
+  m_PrefabInstance: {fileID: 6306863621470484527}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1391641060
 GameObject:
   m_ObjectHideFlags: 0
@@ -348,7 +355,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: -1605096968, guid: fd2bb44fc28a8dc4ba0b85977845c757, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -368,7 +375,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1391641060}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.28, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
